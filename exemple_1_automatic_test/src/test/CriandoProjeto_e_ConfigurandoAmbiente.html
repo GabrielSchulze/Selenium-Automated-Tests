@@ -1,0 +1,80 @@
+#Autor: Gabriel Schulze
+#Informações gerais necessárias para a criação dos testes automatizados utilizando Selenium, Java e JUnit.
+
+#Criação do projeto dom Maven:
+1 - Abrir o CMD dentro da pasta onde você pretende criar o projeto e executar o comando:
+"mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart";
+    1.1 - Preencher o que se pede e apertar no "Enter":
+    'groupId': {Preencher o domínio do seu sistema ao contrário}
+        Exemplo: Define value for property 'groupId': br.com.exemplo
+    'artifactId': {Preencher o nome do seu projeto}
+        Exemplo: Define value for property 'artifactId': exemple_automatic_test  
+    'version': {Preencher número da versão que você deseja que seja a inicial para seu projeto}
+        Exemplo: Define value for property 'version' 1.0-SNAPSHOT: : 11.0
+    'package': {Preenchar o nome do seu pacote}
+        Exemplo: Define value for property 'package' br.com.exemplo: : example_automatic_test
+
+2- Conferir os dados e confirmar com 'Y';
+
+3- Arrastar a pasta do projeto para o VS Code.
+________________________________________________
+
+#Configuração do projeto:
+1- Dentro da pasta do seu projeto, criar a pasta "test", onde ficarão os casos de testes criados;
+    1.1- Exemplo: LoginTest.java.
+
+2- Dentro da pasta do seu projeto, criar a pasta "resource", onde ficarão os arquivos estáticos;
+    2.1- Exemplo: user_credentials.csv, test_config,proprietes.
+
+3- Dependências necessárias:
+    -Abrir o arquivo pom.xml (O arquivo pom.xml é um arquivo de configuração do Maven em projetos Java, 
+    contendo informações sobre dependências, plugins e configurações do projeto, permitindo sua compilação, 
+    empacotamento e execução de forma padronizada.);
+
+    3.1- Inserir:
+    <!-- Configuração para compatibilidade com Java 8 e encoding 'UTF-8'-->
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    3.2- Dentro da tag  <dependencies> declarar as seguintes dependências:
+
+    <!-- Dependência para o JUnit-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Dependência para o Selenium funcionar no navegador Chrome-->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-chrome-driver</artifactId>
+      <version>3.141.59</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Dependência de recursos adicionais para selenium-->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-support</artifactId>
+      <version>3.141.59</version>
+      <scope>test</scope>
+    </dependency>
+
+4- Baixar e instalar o ChromeDriver:
+4.1 - Verificar qual a versão do seu navegador e anotar o início dela, exemplo: "95.0.4638";
+    4.2 - Acessar "chromedriver.chromium.org/downloads";
+    4.3 - Realizar o download da versão mais recente que possua em sua versão o início igual a versão do seu navegador, 
+    conforme anotado no passo 4.1;
+    4.4 - Ao baixar, a pasta compactada vai ficar na pasta "Dowdnloads", logo:
+        4.4.1 - Realize a extração do conteúdo;
+        4.4.2 - Renomeie o arquivo "chromedriver" adicionando ao final dele a versão, exemplo: "chromedriver - v9504638". 
+        Isso para você saber que essa versão do ChromeDriver é compatível com determinado navegador;
+        4.4.3 - Copiar o arquivo "chromedriver - v9505638" para dentro da pasta "resource" criada dentro do seu projeto.
+                Você pode fazer isso simplesmente arrastando o arquivo para dentro da pasta em cima do próprio VSCode, 
+                ou recortando via explorador de arquivos do Windows.

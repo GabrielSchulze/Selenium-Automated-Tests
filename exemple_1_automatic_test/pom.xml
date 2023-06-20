@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>br.com.exemplo</groupId>
+  <artifactId>exemple_automatic_test</artifactId>
+  <packaging>jar</packaging>
+  <version>11.0</version>
+  <name>exemple_automatic_test</name>
+  <url>http://maven.apache.org</url>
+
+  <!-- Configuração para compatibilidade com Java 8 e encoding 'UTF-8'-->
+  <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+<!-- Configuração de dependências -->
+  <dependencies>
+    <!-- Dependência para o JUnit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Dependência para o Selenium funcionar no navegador Chrome -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-chrome-driver</artifactId>
+      <version>3.141.59</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Dependência para ferramentas para selenium -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-support</artifactId>
+      <version>3.141.59</version>
+      <scope>test</scope>
+    </dependency>
+
+  
+    <dependency>
+      <groupId>com.testsigma</groupId>
+      <artifactId>testsigma-sdk</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+  </dependencies>
+</project>

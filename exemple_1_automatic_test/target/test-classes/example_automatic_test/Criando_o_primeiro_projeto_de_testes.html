@@ -1,0 +1,90 @@
+#Autor: Gabriel Schulze
+#Criando o primeiro projeto de testes
+
+1- Dentro da pasta "test" criar um novo arquivo chamado "GoogleTest.java";
+
+2- Dentro da classe "GoogleTest" inserir o atributo "driver" apontando para o "WebDriver" do Selenium, 
+que é a interface responsável por interagir com os navegadores. 
+        -Exemplo: "private WebDriver driver;".
+
+    Após isso, automaticamente o VSCode irá inserir o import "import org.openqa.selenium.WebDriver;" logo acima da classe, 
+importando o pacote onde se encontra a biblioteca Selenium WebDriver.
+
+3- Inserir uma constante chamada "URL_BASE" apontando para a url do Site/Sistema que você irá testar.
+        -Exemplo:  private final String URL_BASE = "https://www.google.com/";
+
+4- Inserir uma constante chamada "CAMINHO_DRIVER" apontando para o caminho onde está o arquivo "chromedriver...".
+   Para copiar o caminho, você pode pelo próprio VSCode clicar em cima do arquivo com o botão direito do mouse e clicar em 
+   "Copy Relative Path", após isso deve-se colar o diretório na sua constante e então ALTERAR todas as contra-barra "\" para barra "/";
+        -Exemplo: private final String CAMINHO_DRIVER = "src/test/java/example_automatic_test/resource/chromedriver - v114.05735.exe";
+
+5- Criar um método chamado "iniciar". O mesmo será responsável por abrir o navegador na URL_BASE. Esse método deve ser chamado 
+    em cada teste executado. Dentro do método, crie conforme a baixo:
+            <!-- 1- "webdriver.chrome.driver": que diz para o Selenium que ele deve utilizar o driver específico do Google Chrome. 
+                 2- "CAMINHO_DRIVER": Essa propriedade informa ao Selenium onde está localizado, "fisicamente", o driver do Chrome 
+                 para que ele possa utilizá-lo posteriormente. -->
+            System.setProperty("webdriver.chrome.driver", CAMINHO_DRIVER);
+            
+            <!-- Instânciado um objeto do ChromeDriver. Essa instância será usada para controlar e interagir com o navegador Chrome 
+                 durante o teste. -->
+            driver = new ChromeDriver();
+
+            <!-- Em cima do 'driver' utiliza-se os métodos para manipular a janela do navegador, nesse caso, maximiza a janela do 
+                 navegador. -->
+            driver.manage().window().maximize();
+
+            <!-- Em cima do 'driver', chamamos o "get", passando como parâmetro a url base, para abrir o navegador naquela url 
+                 específica. -->
+            driver.get(URL_BASE);
+
+6- Criando um teste de exemplo:
+    <!-- Vamor criar um teste que pesquise no Google e verifique o resultado. -->
+    6.1- Criano o método:
+        6.1.1- Crie um método chamado "devePesquisarGoogle":
+            Ex: public void devePesquisarGoogle(){}
+        
+        6.1.2- Na linha acima do método declarado, você pode (opcional) inserir o "@Test", ele é uma anotação do JUnit usada para identificar 
+        que um método específico é um caso de teste.
+
+        6.1.3- Dentro do método:
+                <!--Chamar o método "iniciar", responsável por intanciar um objeto do ChromeDriver e abrir o navegador na página da URL_BASE.-->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                iniciar();
+                
+            <!--Criar uma variável do tipo WebElement, que irá receber um elemento web do navegador.
+                Inserir nessa variável um elemento (Ex: campo de busca) do site, para isso, através do 'driver' (que é o navegador), 
+                buscar o elemento web pelo "nome" utilizando o método 'findElement', que é um método do Selenium.
+                OBS: Para saber como identificar o nome ou id do elemento web, verifique o ponto 6.1.4 -->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                WebElement inputPesquisa = driver.findElement(By.name("q"));
+            
+            <!--Na variável criada, na qual foi salvo o WebElement, executar o método "sendKeys", o qual serve para inserir texto em um elemento
+            da página web. Se trata de um método do Selenium. Nos parâmetros desse método você vai colocar entre aspas o texto que deseja inserir
+            e o "+ Keys.ENTER" serve para que o Selenium aperte o "Enter" do teclado, simulando o usuário. -->
+                inputPesquisa.sendKeys("Curso completo de Selenium" + Keys.ENTER);
+
+            <!--Declare uma variável "resultado" do tipo String, para salvar o resultado da pesquisa.
+                Dentro dela insira o WebElement desejado após executar a pesquisa. 
+                O "By.id" busca o elemento pelo id. o "getText" busca o texto do elemento. 
+                OBS: Para saber como identificar o nome ou id do elemento web, verifique o ponto 6.1.4 -->    
+                String resultado = driver.findElement(By.id("result-stats")).getText();
+            
+            <!--Utilizando a "assertTrue", uma função do JUnit, você pode buscar dentro da variável de resultado por uma palavra esperada.
+                Nesse exemplo, nos parâmetros vamos colocar o nome da variável e depois vamos usar o método "contains" para verificar se tal palavra
+                existe na variável. -->
+                assertTrue(resultado, resultado.contains("Aproximadamente"));
+        
+        6.1.4 - Como identificar o nome ou id do WebElement na página web:
+            6.1.4.1 - Estando na página web, clicar com o botão F12 do teclado, irá abrir o "DevTools";
+            6.1.4.2 - Ir na aba "Elements" e apertar o comando "CTRL + SHIFT + C";
+            6.1.4.3 - Clicar em cima do elemento desejado e verificar  que as informações do mesmo serão evidênciadas no DevTools;
+            6.1.4.4 - Agora pasta você verificar a informação do nome em "name" ou do "id".        
+
+
+    <!--EXEMPLO DE COMO DEVE FICAR O MÉTODO PRONTO-->
+    @Test
+    public void devePesquisarGoogle(){
+        iniciar();
+        WebElement inputPesquisa = driver.findElement(By.name("q"));
+        inputPesquisa.sendKeys("Curso completo de Selenium" + Keys.ENTER);
+        String resultado = driver.findElement(By.id("result-stats")).getText();
+        assertTrue(resultado, resultado.contains("Aproximadamente"));
+    }
